@@ -11,7 +11,6 @@ import Then
 
 class HomePardnerShipView : UIView {
     private weak var viewController: UIViewController?
-    
     private let pardnerShipLabel = UILabel().then {
         $0.text = "🏄‍♂️ PARDNERSHIP 🏄‍♂️"
         $0.font = .pardFont.head2
@@ -26,7 +25,7 @@ class HomePardnerShipView : UIView {
         $0.addTarget(self, action: #selector(tappedmoreButton), for: .touchUpInside)
     }
     
-    private let podPointLabel = UILabel().then {
+    private let pardPointLabel = UILabel().then {
         $0.text = "파드 포인트"
         $0.textColor = .pard.gray10
         $0.font = .pardFont.body2
@@ -38,8 +37,8 @@ class HomePardnerShipView : UIView {
         $0.font = .pardFont.body2
     }
     
-    private let podPointValueLabel = UILabel().then {
-        $0.text = "+\(totalBonus)점"
+    private let pardPointValueLabel = UILabel().then {
+        $0.text = "+7점"
         $0.textColor = .pard.primaryGreen
         $0.font = .pardFont.head2
     }
@@ -59,9 +58,9 @@ class HomePardnerShipView : UIView {
         view.backgroundColor = .pard.gray10
     }
     
-    init(viewController: UIViewController) {
+    convenience init(viewController: UIViewController) {
+        self.init(frame: .zero)
         self.viewController = viewController
-        super.init(frame: .zero)
         setUpUI()
     }
     
@@ -76,15 +75,16 @@ class HomePardnerShipView : UIView {
     
     @objc private func tappedmoreButton() {
         let myScoreViewController = MyScoreViewController()
-        viewController?.navigationController?.pushViewController(myScoreViewController, animated: true)
+        myScoreViewController.hidesBottomBarWhenPushed = true
+        viewController?.navigationController?.pushViewController(myScoreViewController, animated: false)
     }
     
     private func setUpUI() {
         addSubview(pardnerShipLabel)
         addSubview(moreButton)
         addSubview(separator)
-        addSubview(podPointLabel)
-        addSubview(podPointValueLabel)
+        addSubview(pardPointLabel)
+        addSubview(pardPointValueLabel)
         addSubview(penaltyLabel)
         addSubview(penaltyValueLabel)
         addSubview(verticalSeparator)
@@ -105,13 +105,13 @@ class HomePardnerShipView : UIView {
             make.height.equalTo(1)
         }
 
-        podPointLabel.snp.makeConstraints { make in
+        pardPointLabel.snp.makeConstraints { make in
             make.top.equalTo(separator.snp.bottom).offset(20.5)
             make.leading.equalToSuperview().offset(55)
         }
 
-        podPointValueLabel.snp.makeConstraints { make in
-            make.top.equalTo(podPointLabel.snp.bottom).offset(8.0)
+        pardPointValueLabel.snp.makeConstraints { make in
+            make.top.equalTo(pardPointLabel.snp.bottom).offset(8.0)
             make.leading.equalToSuperview().offset(65.5)
         }
 

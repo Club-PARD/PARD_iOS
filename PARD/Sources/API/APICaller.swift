@@ -36,7 +36,7 @@ func getData() {
 
                     // JSON 데이터가 맞으면 디코딩 시도
 //                        let decodeData = try decoder.decode([Test].self, from: JSONdata)
-                    // self.pardData = PardData(data: decodeData)
+                   // self.pardData = PardData(data: decodeData)
                     DispatchQueue.main.async {
                         // self.tableView.reloadData()
                     }

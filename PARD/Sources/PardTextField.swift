@@ -6,7 +6,6 @@
 import UIKit
 
 public final class PardTextField: UITextField {
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }

@@ -42,7 +42,5 @@ class PardNotionLinkCollectionViewCell: UICollectionViewCell {
             make.centerY.equalToSuperview()
         }
     }
-    
-    
 }
 

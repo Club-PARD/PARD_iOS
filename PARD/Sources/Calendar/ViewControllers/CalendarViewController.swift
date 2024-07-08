@@ -8,6 +8,10 @@ class CalendarViewController: UIViewController {
         $0.configureWithOpaqueBackground()
         $0.backgroundColor = .pard.blackBackground
         $0.shadowColor = .pard.blackBackground
+        $0.titleTextAttributes = [
+            .foregroundColor: UIColor.pard.white100, // 타이틀 텍스트 색상
+            .font: UIFont.pardFont.head1
+        ]
     }
     
     private let previousAppearance = UINavigationBarAppearance().then {

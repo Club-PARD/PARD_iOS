@@ -115,6 +115,7 @@ class EventTableViewCell: UITableViewCell {
             titleLabel.textColor = .pard.gray10
             dateLabel.textColor = .pard.gray10
             locationLabel.textColor = .pard.gray10
+            dDayLabel.textColor = .pard.gray10
             dDayLabel.text = "D-\(schedule.remaingDay)"
         }
         

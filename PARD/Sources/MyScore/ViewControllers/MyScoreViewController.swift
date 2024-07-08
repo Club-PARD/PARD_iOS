@@ -9,9 +9,24 @@ import UIKit
 import PARD_DesignSystem
 
 class MyScoreViewController: UIViewController {
-    
     let pardnerShipLabel = UILabel()
     let scoreRecordsView = ScoreRecordsView()
+    
+    private let appearance = UINavigationBarAppearance().then {
+        $0.configureWithOpaqueBackground()
+        $0.backgroundColor = .pard.blackBackground
+        $0.shadowColor = .pard.blackBackground
+        $0.titleTextAttributes = [
+            .foregroundColor: UIColor.pard.white100, // 타이틀 텍스트 색상
+            .font: UIFont.pardFont.head1
+        ]
+    }
+    
+    private let previousAppearance = UINavigationBarAppearance().then {
+        $0.configureWithOpaqueBackground()
+        $0.backgroundColor = .pard.blackCard
+        $0.shadowColor = .pard.blackCard
+    }
     
     private var toolTipView: ToolTipView?
     
@@ -36,21 +51,34 @@ class MyScoreViewController: UIViewController {
         setupScoreRecordsView()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let tabBarViewController = tabBarController as? HomeTabBarViewController {
+            tabBarViewController.floatingButton.isHidden = false
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let tabBarViewController = tabBarController as? HomeTabBarViewController {
+            tabBarViewController.floatingButton.isHidden = false
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let tabBarViewController = tabBarController as? HomeTabBarViewController {
+            tabBarViewController.floatingButton.isHidden = true
+        }
+    }
+    
     private func setNavigation() {
         self.navigationItem.title = "내 점수"
-        if let navigationBar = self.navigationController?.navigationBar {
-            navigationBar.titleTextAttributes = [
-                .font:  UIFont.pardFont.head2,
-                .foregroundColor: UIColor.white
-            ]
-        }
         let backButton = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .plain, target: self, action: #selector(backButtonTapped))
         backButton.tintColor = .white
         self.navigationItem.leftBarButtonItem = backButton
-        
-        
     }
-    
+
     @objc func backButtonTapped() {
         let homeViewController = HomeViewController()
         navigationController?.setViewControllers([homeViewController], animated: true)
@@ -684,7 +712,6 @@ class MyScoreViewController: UIViewController {
 
 
     class ToolTipView: UIView {
-
         private let closeButton = UIButton()
         private let contentView = UIView()
 
