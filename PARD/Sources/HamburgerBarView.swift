@@ -79,7 +79,6 @@ extension HamburgerBarView : UITableViewDelegate , UITableViewDataSource {
         let menu = MenuTable.menuTableModel[indexPath.section][indexPath.row]
         if indexPath.row == 0 && indexPath.section == 0 {
             cell.configureCell(text: menu.subtitle, image: menu.imageNamed, isHiddenButton: false ,at: indexPath)
-            cell.index = indexPath.row
             cell.delegate = self
         } else {
             cell.configureCell(text: menu.subtitle, image: menu.imageNamed, isHiddenButton: true, at: indexPath)
@@ -122,9 +121,13 @@ extension HamburgerBarView : UITableViewDelegate , UITableViewDataSource {
 // - MARK: HamburgerBarView 
 extension HamburgerBarView : MenuTableViewCellButtonTapedDelegate {
     func cellButtonTaped(index: Int, isHiddenView : Bool) {
-        menuTableView.beginUpdates()
-        selectedNotionView = isHiddenView
-        menuTableView.endUpdates()
+        if index == 0 {
+            menuTableView.beginUpdates()
+            selectedNotionView = isHiddenView
+            menuTableView.endUpdates()
+        } else {
+            return
+        }
     }
     
     func cellTapped(with url: URL) {
@@ -136,7 +139,7 @@ extension HamburgerBarView : MenuTableViewCellButtonTapedDelegate {
 // - MARK: HamburgerBar HeaderView
 class HeaderView : UIView {
     private let label = UILabel().then { label in
-        label.textColor = .GradientColor.gra
+        label.textColor = .gradientColor.gra
         label.textAlignment = .center
     }
     
