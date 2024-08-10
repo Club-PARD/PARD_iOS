@@ -553,7 +553,6 @@ class MyScoreViewController: UIViewController {
             $0.textColor = .pard.gray10
             $0.textAlignment = .center
             $0.adjustsFontSizeToFitWidth = true
-            $0.minimumScaleFactor = 0.5
         }
         penaltyPointsView.addSubview(penaltyPointsLabel)
         
@@ -562,7 +561,7 @@ class MyScoreViewController: UIViewController {
             $0.font = UIFont.pardFont.head2
             $0.textColor = UIColor.pard.errorRed
             $0.textAlignment = .center
-            
+            $0.minimumScaleFactor = 0.5
         }
         penaltyPointsView.addSubview(penaltyPointsValueLabel)
         

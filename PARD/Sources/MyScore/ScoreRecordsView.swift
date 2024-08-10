@@ -23,7 +23,7 @@ class ScoreRecordsView: UIView, UICollectionViewDataSource, UICollectionViewDele
         label.numberOfLines = 2
         label.textColor = .pard.gray10
         label.textAlignment = .center
-        label.font = .pardFont.body6
+        label.font = .pardFont.body2
         label.setLineSpacing(spacing: 10)
     }
     
