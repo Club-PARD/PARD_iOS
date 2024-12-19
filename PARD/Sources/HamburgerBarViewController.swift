@@ -10,20 +10,34 @@ import UIKit
 // - MARK: HamburgerBar
 class HamburgerBarViewController: UIViewController {
     private let dimmedView = UIView().then { dimmedView in
-        dimmedView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        dimmedView.backgroundColor = UIColor.black.withAlphaComponent(0)
     }
     
+    private var hamburgerBar: HamburgerBarView!
     var didDismiss: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpHamburgerBarUI()
         self.tabBarController?.tabBar.isHidden = true
+        
+        hamburgerBar.transform = CGAffineTransform(translationX: view.frame.width, y: 0)
+        dimmedView.alpha = 0
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseOut]) {
+            self.hamburgerBar.transform = .identity
+            self.dimmedView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+            self.dimmedView.alpha = 1.0
+        }
     }
     
     private func setUpHamburgerBarUI() {
-        let hamburgerBar = HamburgerBarView(superview: self.view)
-
+        hamburgerBar = HamburgerBarView(superview: self.view)
+        
         let tapGesture = UITapGestureRecognizer(
             target: self,
             action: #selector(didTapedDimmedView)
@@ -33,17 +47,20 @@ class HamburgerBarViewController: UIViewController {
         view.backgroundColor = .clear
         view.addSubview(dimmedView)
         dimmedView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalTo(hamburgerBar.snp.leading)
-            make.bottom.equalToSuperview()
+            make.edges.equalToSuperview()
         }
         
+        view.bringSubviewToFront(hamburgerBar)
     }
     
     @objc private func didTapedDimmedView() {
-        self.dismiss(animated: true) {
-            self.didDismiss?()
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseIn], animations: {
+            self.hamburgerBar.transform = CGAffineTransform(translationX: self.view.frame.width, y: 0)
+            self.dimmedView.alpha = 0
+        }) { _ in
+            self.dismiss(animated: false) {
+                self.didDismiss?()
+            }
         }
     }
 }

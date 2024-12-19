@@ -71,13 +71,12 @@ class HomeViewController: UIViewController {
     @objc private func menuButtonTapped() {
         let menuBar = HamburgerBarViewController()
         menuBar.modalPresentationStyle = .overCurrentContext
-        menuBar.modalTransitionStyle = .crossDissolve
         menuBar.didDismiss = { [weak self] in
             self?.tabBarController?.tabBar.isHidden = false
         }
         if #available(iOS 15, *) {
             if let topViewController = UIApplication.shared.windows.first?.rootViewController {
-                    topViewController.present(menuBar, animated: true)
+                topViewController.present(menuBar, animated: false)  // animated를 false로 설정
             }
         }
     }
