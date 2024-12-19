@@ -10,7 +10,7 @@ import Then
 import SnapKit
 import PARD_DesignSystem
 
-class MyScoreViewController: UIViewController {
+class MyScoreViewController: UIViewController, UIGestureRecognizerDelegate {
     private let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
         $0.showsHorizontalScrollIndicator = false
@@ -122,10 +122,7 @@ class MyScoreViewController: UIViewController {
     }
     
     @objc func backButtonTapped() {
-        removeTabBarFAB(bool: false)
-        navigationController?.navigationBar.standardAppearance = previousAppearance
-        navigationController?.navigationBar.scrollEdgeAppearance = previousAppearance
-        navigationController?.popViewController(animated: false)
+        navigationController?.popViewController(animated: true)
     }
     
     
@@ -158,7 +155,25 @@ class MyScoreViewController: UIViewController {
             make.edges.equalToSuperview()
             make.width.height.equalToSuperview()
         }
-
+        
+        // 스와이프 제스처 추가
+        let swipeGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        swipeGesture.delegate = self
+        view.addGestureRecognizer(swipeGesture)
+    }
+    
+    @objc private func handlePan(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: view)
+        let velocity = gesture.velocity(in: view)
+        
+        // 수평 스와이프만 처리
+        if abs(translation.x) > abs(translation.y) {
+            if gesture.state == .ended {
+                if translation.x > 50 || velocity.x > 500 {
+                    navigationController?.popViewController(animated: true)
+                }
+            }
+        }
     }
     
     private func isNotUser() {
@@ -715,19 +730,40 @@ extension MyScoreViewController {
         setupScoreView()
         setupScoreStatusView()
         setupScoreRecordsView()
+
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
         removeTabBarFAB(bool: true)
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
-    private func removeTabBarFAB(bool : Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.standardAppearance = previousAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = previousAppearance
+        removeTabBarFAB(bool: false)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    private func removeTabBarFAB(bool: Bool) {
         self.tabBarController?.setTabBarVisible(visible: !bool, animated: false)
         if let tabBarViewController = tabBarController as? HomeTabBarViewController {
             tabBarViewController.floatingButton.isHidden = bool
         }
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let panGesture = gestureRecognizer as? UIPanGestureRecognizer {
+            let translation = panGesture.translation(in: view)
+            return abs(translation.x) > abs(translation.y)
+        }
+        return true
     }
 }
 

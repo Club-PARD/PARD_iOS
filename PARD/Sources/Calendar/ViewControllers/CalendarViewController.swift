@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 import Then
 
-class CalendarViewController: UIViewController {
+class CalendarViewController: UIViewController, UIGestureRecognizerDelegate {
     var schedules: [ScheduleModel] = []
     private let appearance = UINavigationBarAppearance().then {
         $0.configureWithOpaqueBackground()
@@ -49,18 +49,36 @@ class CalendarViewController: UIViewController {
         navigationController?.popViewController(animated: false)
     }
     
-    
-    
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(EventTableViewCell.self, forCellReuseIdentifier: "EventCell")
         view.addSubview(tableView)
+
         tableView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(24)
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().offset(-24)
             make.bottom.equalToSuperview()
+        }
+        
+        // 테이블뷰에 스와이프 제스처 추가
+        let swipeGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        swipeGesture.delegate = self
+        tableView.addGestureRecognizer(swipeGesture)
+    }
+    
+    @objc private func handlePan(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: view)
+        let velocity = gesture.velocity(in: view)
+        
+        // 수평 스와이프만 처리
+        if abs(translation.x) > abs(translation.y) {
+            if gesture.state == .ended {
+                if translation.x > 50 || velocity.x > 500 {
+                    navigationController?.popViewController(animated: true)
+                }
+            }
         }
     }
     
@@ -74,6 +92,7 @@ class CalendarViewController: UIViewController {
         tableView.reloadData()
     }
 }
+
 // - MARK: CalendarViewController의 생태주기
 extension CalendarViewController {
     override func viewDidLoad() {
@@ -83,6 +102,9 @@ extension CalendarViewController {
         setNavigation()
         setupTableView()
         getSchedule(for: self)
+        
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -97,6 +119,9 @@ extension CalendarViewController {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
         removeTabBarFAB(bool: true)
+        
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
     private func removeTabBarFAB(bool : Bool) {
@@ -171,5 +196,14 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.labelConfigure(with: event)
         return cell
+    }
+    
+    // 동시 제스처 인식을 위한 델리게이트 메서드
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let panGesture = gestureRecognizer as? UIPanGestureRecognizer {
+            let translation = panGesture.translation(in: view)
+            return abs(translation.x) > abs(translation.y)
+        }
+        return true
     }
 }

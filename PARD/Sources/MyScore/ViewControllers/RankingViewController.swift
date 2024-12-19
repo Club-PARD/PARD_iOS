@@ -10,7 +10,7 @@ import Then
 import SnapKit
 import PARD_DesignSystem
 
-class RankingViewController: UIViewController {
+class RankingViewController: UIViewController, UIGestureRecognizerDelegate {
     private let appearance = UINavigationBarAppearance().then {
         $0.configureWithOpaqueBackground()
         $0.backgroundColor = .pard.blackBackground
@@ -20,6 +20,13 @@ class RankingViewController: UIViewController {
             .foregroundColor : UIColor.pard.white100,
         ]
     }
+    
+    private let previousAppearance = UINavigationBarAppearance().then {
+        $0.configureWithOpaqueBackground()
+        $0.backgroundColor = .pard.blackCard
+        $0.shadowColor = .pard.blackCard
+    }
+    
     private let rankingsManager = TotalRankManager.shared
     private let tableView = UITableView().then { view in
         view.backgroundColor = .pard.blackCard
@@ -77,6 +84,25 @@ class RankingViewController: UIViewController {
 //        tableView.layer.cornerRadius = 10
         tableView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         tableView.layer.masksToBounds = true
+        
+        // 스와이프 제스처 추가
+        let swipeGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        swipeGesture.delegate = self
+        view.addGestureRecognizer(swipeGesture)
+    }
+
+    @objc private func handlePan(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: view)
+        let velocity = gesture.velocity(in: view)
+        
+        // 수평 스와이프만 처리
+        if abs(translation.x) > abs(translation.y) {
+            if gesture.state == .ended {
+                if translation.x > 50 || velocity.x > 500 {
+                    navigationController?.popViewController(animated: true)
+                }
+            }
+        }
     }
 
     private func setNavigation() {
@@ -90,7 +116,6 @@ class RankingViewController: UIViewController {
     }
 
     @objc func backButtonTapped() {
-        removeTabBarFAB(bool: true)
         navigationController?.popViewController(animated: true)
     }
     
@@ -119,22 +144,29 @@ extension RankingViewController {
         setupTextLabel()
         setupTableView()
         getRankAllData()
+
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
         removeTabBarFAB(bool: true)
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.standardAppearance = appearance
-        self.navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.standardAppearance = previousAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = previousAppearance
+        removeTabBarFAB(bool: false)
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    private func removeTabBarFAB(bool : Bool) {
+    private func removeTabBarFAB(bool: Bool) {
+        self.tabBarController?.setTabBarVisible(visible: !bool, animated: false)
         if let tabBarViewController = tabBarController as? HomeTabBarViewController {
             tabBarViewController.floatingButton.isHidden = bool
         }
@@ -190,5 +222,11 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 
-
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let panGesture = gestureRecognizer as? UIPanGestureRecognizer {
+            let translation = panGesture.translation(in: view)
+            return abs(translation.x) > abs(translation.y)
+        }
+        return true
+    }
 }
