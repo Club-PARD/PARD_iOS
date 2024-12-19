@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		08C978B69F1B43A94EA0E03F /* Pods_PARD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AEE204550D4434A7D54FD5 /* Pods_PARD.framework */; };
 		0D0ADFD92BAAD8EC00094D08 /* PardNotionLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0ADFD82BAAD8EC00094D08 /* PardNotionLinkView.swift */; };
 		0D0ADFDB2BAADD1A00094D08 /* PardNotionLinkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0ADFDA2BAADD1A00094D08 /* PardNotionLinkCollectionViewCell.swift */; };
 		0D70EC452C2D3FFA00FDE559 /* HomePardnerShipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70EC442C2D3FFA00FDE559 /* HomePardnerShipView.swift */; };
@@ -68,6 +67,11 @@
 		90C007D22B95D2CF0056D724 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C007D12B95D2CF0056D724 /* CalendarViewController.swift */; };
 		90C007D42B95D2DE0056D724 /* MyScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C007D32B95D2DE0056D724 /* MyScoreViewController.swift */; };
 		90C007D62B95D2EA0056D724 /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C007D52B95D2EA0056D724 /* RankingViewController.swift */; };
+		B357F8D32D13CF80008FEBED /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = B357F8D22D13CF80008FEBED /* GoogleSignIn */; };
+		B357F8D52D13CF80008FEBED /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B357F8D42D13CF80008FEBED /* GoogleSignInSwift */; };
+		B357F8D82D13D052008FEBED /* AppAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B357F8D72D13D052008FEBED /* AppAuth */; };
+		B357F8DA2D13D052008FEBED /* AppAuthCore in Frameworks */ = {isa = PBXBuildFile; productRef = B357F8D92D13D052008FEBED /* AppAuthCore */; };
+		B357F8DC2D13D052008FEBED /* AppAuthTV in Frameworks */ = {isa = PBXBuildFile; productRef = B357F8DB2D13D052008FEBED /* AppAuthTV */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -121,8 +125,6 @@
 		21A6857B2B9C8967006F6D9E /* AppleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManager.swift; sourceTree = "<group>"; };
 		21A6857D2B9CBFC6006F6D9E /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		21AAAA4B2C3BC0FD00F080A0 /* RankController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankController.swift; sourceTree = "<group>"; };
-		42AEE204550D4434A7D54FD5 /* Pods_PARD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PARD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		552E28987AB486312261E2E4 /* Pods-PARD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PARD.debug.xcconfig"; path = "Target Support Files/Pods-PARD/Pods-PARD.debug.xcconfig"; sourceTree = "<group>"; };
 		9067A1C82C33EB20001E506A /* ScoreRecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreRecordsView.swift; sourceTree = "<group>"; };
 		90C007C42B95D24C0056D724 /* MainLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLoginViewController.swift; sourceTree = "<group>"; };
 		90C007C62B95D2670056D724 /* UserInfoPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoPolicyViewController.swift; sourceTree = "<group>"; };
@@ -133,7 +135,7 @@
 		90C007D12B95D2CF0056D724 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		90C007D32B95D2DE0056D724 /* MyScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScoreViewController.swift; sourceTree = "<group>"; };
 		90C007D52B95D2EA0056D724 /* RankingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingViewController.swift; sourceTree = "<group>"; };
-		BE1C1079A4C16EBD92B1DB3B /* Pods-PARD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PARD.release.xcconfig"; path = "Target Support Files/Pods-PARD/Pods-PARD.release.xcconfig"; sourceTree = "<group>"; };
+		CBB55388A2364CDAD687A66E /* Pods_PARD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PARD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,10 +143,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B357F8DC2D13D052008FEBED /* AppAuthTV in Frameworks */,
+				B357F8D32D13CF80008FEBED /* GoogleSignIn in Frameworks */,
 				217651512B94738800121AB2 /* PARD_DesignSystem in Frameworks */,
 				217651542B94778600121AB2 /* SnapKit in Frameworks */,
+				B357F8D52D13CF80008FEBED /* GoogleSignInSwift in Frameworks */,
 				217651592B94779600121AB2 /* Then in Frameworks */,
-				08C978B69F1B43A94EA0E03F /* Pods_PARD.framework in Frameworks */,
+				B357F8D82D13D052008FEBED /* AppAuth in Frameworks */,
+				B357F8DA2D13D052008FEBED /* AppAuthCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,13 +183,20 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		15416D3450E1A6A25F3C725D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CBB55388A2364CDAD687A66E /* Pods_PARD.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2106ADA02B92D6A000CDA462 = {
 			isa = PBXGroup;
 			children = (
 				2106ADAB2B92D6A000CDA462 /* PARD */,
 				2106ADAA2B92D6A000CDA462 /* Products */,
-				9B1EC759A05B0363277762B0 /* Pods */,
-				FDC94D3498E2CE56C8B87A96 /* Frameworks */,
+				15416D3450E1A6A25F3C725D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -459,23 +472,6 @@
 			name = Managers;
 			sourceTree = "<group>";
 		};
-		9B1EC759A05B0363277762B0 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				552E28987AB486312261E2E4 /* Pods-PARD.debug.xcconfig */,
-				BE1C1079A4C16EBD92B1DB3B /* Pods-PARD.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
-		FDC94D3498E2CE56C8B87A96 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				42AEE204550D4434A7D54FD5 /* Pods_PARD.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -483,11 +479,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2106ADBD2B92D6A200CDA462 /* Build configuration list for PBXNativeTarget "PARD" */;
 			buildPhases = (
-				1749E55790C6ABB15910683E /* [CP] Check Pods Manifest.lock */,
 				2106ADA52B92D6A000CDA462 /* Sources */,
 				2106ADA62B92D6A000CDA462 /* Frameworks */,
 				2106ADA72B92D6A000CDA462 /* Resources */,
-				90A62AFBFC5E65F4E9F03CFE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -498,6 +492,11 @@
 				217651502B94738800121AB2 /* PARD_DesignSystem */,
 				217651532B94778600121AB2 /* SnapKit */,
 				217651582B94779600121AB2 /* Then */,
+				B357F8D22D13CF80008FEBED /* GoogleSignIn */,
+				B357F8D42D13CF80008FEBED /* GoogleSignInSwift */,
+				B357F8D72D13D052008FEBED /* AppAuth */,
+				B357F8D92D13D052008FEBED /* AppAuthCore */,
+				B357F8DB2D13D052008FEBED /* AppAuthTV */,
 			);
 			productName = PARD;
 			productReference = 2106ADA92B92D6A000CDA462 /* PARD.app */;
@@ -531,6 +530,8 @@
 				2176514F2B94738800121AB2 /* XCRemoteSwiftPackageReference "PARD_DesignSystem" */,
 				217651522B94778600121AB2 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				217651572B94779600121AB2 /* XCRemoteSwiftPackageReference "Then" */,
+				B357F8D12D13CF80008FEBED /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				B357F8D62D13D052008FEBED /* XCRemoteSwiftPackageReference "AppAuth-iOS" */,
 			);
 			productRefGroup = 2106ADAA2B92D6A000CDA462 /* Products */;
 			projectDirPath = "";
@@ -553,48 +554,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		1749E55790C6ABB15910683E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PARD-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		90A62AFBFC5E65F4E9F03CFE /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PARD/Pods-PARD-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PARD/Pods-PARD-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PARD/Pods-PARD-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2106ADA52B92D6A000CDA462 /* Sources */ = {
@@ -802,7 +761,6 @@
 		};
 		2106ADBE2B92D6A200CDA462 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 552E28987AB486312261E2E4 /* Pods-PARD.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -836,7 +794,6 @@
 		};
 		2106ADBF2B92D6A200CDA462 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BE1C1079A4C16EBD92B1DB3B /* Pods-PARD.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -916,6 +873,22 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		B357F8D12D13CF80008FEBED /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+		B357F8D62D13D052008FEBED /* XCRemoteSwiftPackageReference "AppAuth-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/openid/AppAuth-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.6;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -933,6 +906,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 217651572B94779600121AB2 /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
+		};
+		B357F8D22D13CF80008FEBED /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B357F8D12D13CF80008FEBED /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		B357F8D42D13CF80008FEBED /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B357F8D12D13CF80008FEBED /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		B357F8D72D13D052008FEBED /* AppAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B357F8D62D13D052008FEBED /* XCRemoteSwiftPackageReference "AppAuth-iOS" */;
+			productName = AppAuth;
+		};
+		B357F8D92D13D052008FEBED /* AppAuthCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B357F8D62D13D052008FEBED /* XCRemoteSwiftPackageReference "AppAuth-iOS" */;
+			productName = AppAuthCore;
+		};
+		B357F8DB2D13D052008FEBED /* AppAuthTV */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B357F8D62D13D052008FEBED /* XCRemoteSwiftPackageReference "AppAuth-iOS" */;
+			productName = AppAuthTV;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
