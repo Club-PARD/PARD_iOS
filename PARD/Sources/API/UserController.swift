@@ -8,6 +8,7 @@
 import UIKit
 
 let url = "https://we-pard.store/v1"
+//let url = "http://192.168.143.5:8080/v1"
 var currentUser: User?
 
 func postLogin(with email: String) {
@@ -15,12 +16,16 @@ func postLogin(with email: String) {
         print("🚨 Invalid URL")
         return
     }
+    
+    let deviceToken = UserDefaults.standard.string(forKey: "fcmToken") ?? ""
+    
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
     
     let body: [String: AnyHashable] = [
-        "email": email
+        "email": email,
+        "deviceToken": deviceToken
     ]
     request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
     
@@ -32,7 +37,6 @@ func postLogin(with email: String) {
         if let responseString = String(data: data, encoding: .utf8) {
             print("✅ success: \(responseString)")
         } else {
-            
             print("🚨 Error: Unable to convert data to string")
         }
     }
