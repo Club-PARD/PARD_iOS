@@ -197,7 +197,7 @@ extension MenuTable {
             MenuTable(title: "공지 및 자료", subtitle: "PARD 노션", imageNamed: "notion")
         ],
         [
-            MenuTable(title: "피드백", subtitle: "세미나 구글폼", imageNamed: "googleForm")
+            MenuTable(title: "피드백", subtitle: "운영진 피드백 구글폼", imageNamed: "googleForm")
         ],
         [
             MenuTable(title: "공식 채널", subtitle: "인스타그램", imageNamed: "instargram"),

@@ -78,8 +78,8 @@ class HamBurgerTableViewCell: UITableViewCell {
         case "PARD 노션":
             didTapButton()
             return
-        case "세미나 구글폼":
-            urlString = "https://we-pard.notion.site/a2739c33900847fd95ba4346cd4f4e24?pvs=4"
+        case "운영진 피드백 구글폼":
+            urlString = "https://forms.gle/3uP86uKYuyJyyzhQ9"
         case "인스타그램":
             urlString = "https://www.instagram.com/official_pard_/"
         case "웹사이트":
@@ -107,8 +107,8 @@ class HamBurgerTableViewCell: UITableViewCell {
             }
             return
             
-        case "세미나 구글폼":
-            urlString = "https://we-pard.notion.site/a2739c33900847fd95ba4346cd4f4e24?pvs=4"
+        case "운영진 피드백 구글폼":
+            urlString = "https://forms.gle/3uP86uKYuyJyyzhQ9"
             
         case "인스타그램":
             urlString = "https://www.instagram.com/official_pard_/"

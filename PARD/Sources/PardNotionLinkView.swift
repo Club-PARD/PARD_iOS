@@ -92,11 +92,11 @@ struct PardNotionLinkData {
 
 extension PardNotionLinkData {
    static let menuTableModel = [
-        PardNotionLinkData(title: "전체", notionLink: "https://www.notion.so/we-pard/PARD-4-77fa76fb691f4e96a9828fa9795e2966?pvs=4"),
-        PardNotionLinkData(title: "기획 파트", notionLink: "https://www.notion.so/we-pard/fc5eb2aa910443bea192cb39b9f1c95b?pvs=4"),
-        PardNotionLinkData(title: "디자인 파트", notionLink: "https://www.notion.so/we-pard/7236ac4dd8554c3fbb04521a66989129?pvs=4"),
-        PardNotionLinkData(title: "웹 파트", notionLink: "https://www.notion.so/we-pard/4-1daf3d3c6ef44a5081af7426379fbdae?pvs=4"),
-        PardNotionLinkData(title: "서버 파트", notionLink: "https://www.notion.so/we-pard/a756ec598dca40e194f6cf164af7307b?pvs=4"),
-        PardNotionLinkData(title: "iOS 파트", notionLink: "https://www.notion.so/we-pard/4-iOS-007413e464e5409faed2c76b9e6096e0?pvs=4")
+        PardNotionLinkData(title: "전체", notionLink: "https://www.notion.so/we-pard/PARD-5-1ac9fe7667e68042b5a9dcb1fce1cea0"),
+        PardNotionLinkData(title: "기획 파트", notionLink: "https://www.notion.so/we-pard/1a79fe7667e680a5a660ed3d9a946eb9"),
+        PardNotionLinkData(title: "디자인 파트", notionLink: "https://www.notion.so/we-pard/UX-UI-1ac9fe7667e680f1863bce8e70559b36"),
+        PardNotionLinkData(title: "웹 파트", notionLink: "https://www.notion.so/we-pard/1ac9fe7667e68005bdb7f35d573a28b5"),
+        PardNotionLinkData(title: "서버 파트", notionLink: " https://www.notion.so/we-pard/1ac9fe7667e68059b7f8f2364aa56b8d"),
+        PardNotionLinkData(title: "iOS 파트", notionLink: "https://www.notion.so/we-pard/iOS-1b49fe7667e680de89fbd5cc7828d172")
     ]
 }
