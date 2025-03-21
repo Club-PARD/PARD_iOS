@@ -96,7 +96,7 @@ extension PardNotionLinkData {
         PardNotionLinkData(title: "기획 파트", notionLink: "https://www.notion.so/we-pard/1a79fe7667e680a5a660ed3d9a946eb9"),
         PardNotionLinkData(title: "디자인 파트", notionLink: "https://www.notion.so/we-pard/UX-UI-1ac9fe7667e680f1863bce8e70559b36"),
         PardNotionLinkData(title: "웹 파트", notionLink: "https://www.notion.so/we-pard/1ac9fe7667e68005bdb7f35d573a28b5"),
-        PardNotionLinkData(title: "서버 파트", notionLink: " https://www.notion.so/we-pard/1ac9fe7667e68059b7f8f2364aa56b8d"),
+        PardNotionLinkData(title: "서버 파트", notionLink: "https://www.notion.so/we-pard/1ac9fe7667e68059b7f8f2364aa56b8d"),
         PardNotionLinkData(title: "iOS 파트", notionLink: "https://www.notion.so/we-pard/iOS-1b49fe7667e680de89fbd5cc7828d172")
     ]
 }

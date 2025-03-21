@@ -628,7 +628,7 @@ class MyScoreViewController: UIViewController, UIGestureRecognizerDelegate {
             view.addSubview(toolTip)
             toolTip.snp.makeConstraints { make in
                 make.top.equalTo(questionImageButton.snp.bottom).offset(8)
-                make.leading.equalToSuperview().offset(45)
+                make.leading.equalToSuperview().offset(20)
                 make.trailing.equalToSuperview().offset(-18)
                 make.height.equalTo(200)
             }
