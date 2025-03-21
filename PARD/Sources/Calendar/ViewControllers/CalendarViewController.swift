@@ -65,7 +65,7 @@ class CalendarViewController: UIViewController, UIGestureRecognizerDelegate {
         // 테이블뷰에 스와이프 제스처 추가
         let swipeGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         swipeGesture.delegate = self
-        tableView.addGestureRecognizer(swipeGesture)
+        view.addGestureRecognizer(swipeGesture)
     }
     
     @objc private func handlePan(_ gesture: UIPanGestureRecognizer) {
@@ -198,11 +198,10 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    // 동시 제스처 인식을 위한 델리게이트 메서드
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        if let panGesture = gestureRecognizer as? UIPanGestureRecognizer {
-            let translation = panGesture.translation(in: view)
-            return abs(translation.x) > abs(translation.y)
+        // 테이블뷰의 스크롤 제스처인 경우 우선권 부여
+        if otherGestureRecognizer == tableView.panGestureRecognizer {
+            return false
         }
         return true
     }
