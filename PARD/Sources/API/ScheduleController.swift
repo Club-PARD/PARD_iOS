@@ -84,7 +84,13 @@ class ScheduleDataList {
             do {
                 let schedules = try decoder.decode([ScheduleModel].self, from: data)
                 print("✅ Success: \(schedules)")
-                completion(.success(schedules))
+                
+                // 🔥 "파트"가 "전체"인 데이터만 필터링
+                let filteredSchedules = schedules.filter { $0.part == "전체" }
+                
+                print("✅ Filtered Schedules (Only '전체'):", filteredSchedules)
+                completion(.success(filteredSchedules))
+                
             } catch let decodingError {
                 print("🚨 Decoding Error:", decodingError)
                 completion(.failure(.decodingError(decodingError)))
