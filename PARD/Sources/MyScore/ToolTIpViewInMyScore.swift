@@ -47,7 +47,6 @@ class ToolTIpViewInMyScore: UIView {
         contentStack.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(16)
-
         }
         
         addMVPRow(to: contentStack, title: "MVP", details: [
@@ -61,7 +60,8 @@ class ToolTIpViewInMyScore: UIView {
         addRow(to: contentStack, title: "소통", detail: "파드 구성원과의 만남 후 사진을 슬랙에 인증", point: "1점/주 1회", highlight: true)
         addRow(to: contentStack, title: "회고", detail: "디스콰이어 작성 후 파트장에게 공유", point: "3점/필수과제 제외", highlight: true)
         addPenaltyRows(to: contentStack, title: "벌점", details: [
-            ("세미나 지각(10분 이내)", "-1점"),
+            ("세미나 지각 (10분 내)", "-0.5점"),
+            ("세미나 지각(10분 이상)", "-1점"),
             ("세미나 결석", "-2점"),
             ("과제 지각", "-0.5점"),
             ("과제 미제출", "-1점")
