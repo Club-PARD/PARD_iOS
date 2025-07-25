@@ -7,7 +7,7 @@
 
 import UIKit
 
-let url = "https://we-pard.store/v1"
+let url = "https://we-pard.shop/v1"
 //let url = "http://192.168.143.5:8080/v1"
 var currentUser: User?
 
