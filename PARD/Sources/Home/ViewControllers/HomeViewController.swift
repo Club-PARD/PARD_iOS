@@ -11,6 +11,7 @@ import Then
 
 class HomeViewController: UIViewController {
     private var esterEggCount = 0
+    
     private lazy var topView = HomeTopView(viewController: self).then { view in
         view.backgroundColor = .pard.blackCard
         view.layer.cornerRadius = 40.0
@@ -18,15 +19,13 @@ class HomeViewController: UIViewController {
         view.layer.masksToBounds = true
     }
     
-    private lazy var pardnerShipView = HomePardnerShipView(viewController: self).then {
-        view in
+    private lazy var pardnerShipView = HomePardnerShipView(viewController: self).then { view in
         view.backgroundColor = .pard.blackCard
         view.layer.cornerRadius = 8.0
         view.layer.masksToBounds = true
     }
     
-    private lazy var upcommingView = HomeUpcommingView(viewController : self).then {
-        view in
+    private lazy var upcommingView = HomeUpcommingView(viewController : self).then { view in
         view.backgroundColor = .pard.blackCard
         view.layer.cornerRadius = 8.0
         view.layer.masksToBounds = true
@@ -43,25 +42,41 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.standardAppearance = appearance
         
-        let homeButton = UIButton(type: .custom)
-        homeButton.setImage(UIImage(named: "pardHomeLogo")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        homeButton.showsTouchWhenHighlighted = false
-        homeButton.setImage(homeButton.image(for: .normal), for: .highlighted)
-        homeButton.addTarget(self, action: #selector(logoTapped), for: .touchUpInside)
+        let logoImageView = UIImageView(image: UIImage(named: "pardHomeLogo"))
+        logoImageView.contentMode = .scaleAspectFit
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        logoImageView.isUserInteractionEnabled = true
         
-        let homeBarButtonItem = UIBarButtonItem(customView: homeButton)
-        let menuButton = UIBarButtonItem(image: UIImage(named: "menu")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(menuButtonTapped))
+        let logoTapGesture = UITapGestureRecognizer(target: self, action: #selector(logoTapped))
+        logoImageView.addGestureRecognizer(logoTapGesture)
+        
+        navigationController?.navigationBar.addSubview(logoImageView)
+        
+        NSLayoutConstraint.activate([
+            logoImageView.leadingAnchor.constraint(equalTo: navigationController!.navigationBar.leadingAnchor, constant: 20),
+            logoImageView.centerYAnchor.constraint(equalTo: navigationController!.navigationBar.centerYAnchor)
+        ])
+
+        let menuButton = UIBarButtonItem(
+            image: UIImage(named: "menu")?.withRenderingMode(.alwaysOriginal),
+            style: .plain,
+            target: self,
+            action: #selector(menuButtonTapped)
+        )
+        
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         flexibleSpace.width = 10
-        self.navigationItem.leftBarButtonItem = homeBarButtonItem
-        self.navigationItem.rightBarButtonItems = [flexibleSpace,menuButton]
+        self.navigationItem.rightBarButtonItems = [flexibleSpace, menuButton]
     }
     
     @objc private func logoTapped() {
         print("tapped")
         esterEggCount += 1
+        
         if (esterEggCount == 10) {
             print("10 됐음 !! ")
+            esterEggCount = 0
+            
             if let url = URL(string: "https://we-pard.notion.site/d5e1d460c05844c4b810816ff502d5db?pvs=4") {
                 UIApplication.shared.open(url)
             }

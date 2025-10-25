@@ -24,7 +24,7 @@ class HomeTabBarViewController: UITabBarController {
         view.backgroundColor = .pard.blackBackground
         self.navigationController?.navigationBar.isHidden = false
         setUpTabbarView()
-        setUpTabBarLayout()
+//        setUpTabBarLayout()
         setUpTabBarAppearance()
         setUpTabBarItems()
         delegate = self
@@ -41,20 +41,29 @@ class HomeTabBarViewController: UITabBarController {
     }
     
     private func setUpTabbarView() {
+        // 홈 탭바
         let homeViewController = HomeViewController()
         homeViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "home")?.withRenderingMode(.automatic), tag: 0)
         homeViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 12, left: 0, bottom: -12, right: 0)
         homeViewController.tabBarItem.selectedImage = UIImage(named: "home")?.withTintColor(.pard.primaryBlue)
         homeViewController.tabBarController?.tabBar.itemPositioning = .centered
         
+        // 마이 페이지 탭바
         let myPageViewController = MyPageViewController()
         myPageViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "person")?.withTintColor(.pard.gray30), tag: 1)
         myPageViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 12, left: 0, bottom: -12, right: 0)
         myPageViewController.tabBarItem.selectedImage = UIImage(named: "person")?.withTintColor(.pard.primaryBlue)
         
+        // 간격 조절용 탭바 (기능 X)
+        let emptyController = UIViewController()
+        emptyController.tabBarItem = UITabBarItem(title: nil, image: nil, tag: 2)
+        emptyController.tabBarItem.isEnabled = false
+        
         let navigationHome = UINavigationController(rootViewController: homeViewController)
         let navigationMypage = UINavigationController(rootViewController: myPageViewController)
-        setViewControllers([navigationHome, navigationMypage], animated: false)
+        let spacingTabBar = emptyController
+        
+        setViewControllers([navigationHome, spacingTabBar, navigationMypage], animated: false)
         
         let tabBarAppearance = UITabBarAppearance()
         configureTabBarAppearance(tabBarAppearance: tabBarAppearance)
@@ -72,14 +81,15 @@ class HomeTabBarViewController: UITabBarController {
                 self.tabBar.itemPositioning = .centered
             }
         }
+        
         setUpfloatingQRButton()
     }
     
     private func isCompactDeviceWithHomeButton() -> Bool {
         let smallDeviceScreenSizes: [CGSize] = [
-            CGSize(width: 320, height: 568), // iPhone SE (1st gen)
-            CGSize(width: 375, height: 667), // iPhone SE (2nd gen)
-            CGSize(width: 414, height: 736)  // iPhone 6,7,8
+            CGSize(width: 320, height: 568),        // iPhone SE (1st gen)
+            CGSize(width: 375, height: 667),        // iPhone SE (2nd gen)
+            CGSize(width: 414, height: 736)         // iPhone 6,7,8
         ]
         let screenSize = UIScreen.main.bounds.size
         return smallDeviceScreenSizes.contains { $0 == screenSize || CGSize(width: $0.height, height: $0.width) == screenSize }
@@ -96,6 +106,7 @@ class HomeTabBarViewController: UITabBarController {
     private func setUpfloatingQRButton() {
         self.view.addSubview(floatingButton)
         let isCompactDevice = isCompactDeviceWithHomeButton()
+        
         if !isCompactDevice {
             floatingButton.snp.makeConstraints { make in
                 make.width.height.equalTo(80)
@@ -109,6 +120,7 @@ class HomeTabBarViewController: UITabBarController {
                 make.bottom.equalTo(view.snp.bottom).offset(-10)
             }
         }
+        
         floatingButton.addTarget(self, action: #selector(floatingQRButtonTapped), for: .touchUpInside)
     }
     
@@ -141,18 +153,18 @@ class HomeTabBarViewController: UITabBarController {
             tabBar.scrollEdgeAppearance = appearance
         }
         
-        tabBar.backgroundColor = .pard.blackCard
+//        tabBar.backgroundColor = .pard.blackCard
         tabBar.tintColor = .gradientColor.gra
         tabBar.unselectedItemTintColor = .pard.gray30
     }
     
-    private func setUpTabBarLayout() {
-        tabBar.layer.cornerRadius = 20
-        tabBar.layer.masksToBounds = true
-        tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        tabBar.itemWidth = 18
-        tabBar.itemPositioning = .centered
-    }
+//    private func setUpTabBarLayout() {
+//        tabBar.layer.cornerRadius = 20
+//        tabBar.layer.masksToBounds = true
+//        tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+//        tabBar.itemWidth = 18
+//        tabBar.itemPositioning = .centered
+//    }
     
     private func setUpTabBarItems() {
         self.tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
@@ -174,9 +186,9 @@ extension UITabBar {
     
     private func isCompactDeviceWithHomeButton() -> Bool {
         let smallDeviceScreenSizes: [CGSize] = [
-            CGSize(width: 320, height: 568), // iPhone SE (1st gen)
-            CGSize(width: 375, height: 667), // iPhone SE (2nd gen)
-            CGSize(width: 414, height: 736)  // iPhone 6,7,8
+            CGSize(width: 320, height: 568),        // iPhone SE (1st gen)
+            CGSize(width: 375, height: 667),        // iPhone SE (2nd gen)
+            CGSize(width: 414, height: 736)         // iPhone 6,7,8
         ]
         let screenSize = UIScreen.main.bounds.size
         return smallDeviceScreenSizes.contains { $0 == screenSize || CGSize(width: $0.height, height: $0.width) == screenSize }
@@ -194,5 +206,12 @@ extension HomeTabBarViewController : UITabBarControllerDelegate {
                 floatingButton.backgroundColor = .pard.gray30
             }
         }
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        if let index = tabBarController.viewControllers?.firstIndex(of: viewController), index == 1 {
+            return false
+        }
+        return true
     }
 }
