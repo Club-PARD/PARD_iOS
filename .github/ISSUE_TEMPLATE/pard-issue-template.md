@@ -3,7 +3,7 @@ name: Pard issue template
 about: by ram
 title: ''
 labels: ''
-assignees: haram22
+assignees: Bluecho97
 
 ---
 
