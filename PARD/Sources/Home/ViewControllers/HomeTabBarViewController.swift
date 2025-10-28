@@ -55,15 +55,20 @@ class HomeTabBarViewController: UITabBarController {
         myPageViewController.tabBarItem.selectedImage = UIImage(named: "person")?.withTintColor(.pard.primaryBlue)
         
         // 간격 조절용 탭바 (기능 X)
-        let emptyController = UIViewController()
-        emptyController.tabBarItem = UITabBarItem(title: nil, image: nil, tag: 2)
-        emptyController.tabBarItem.isEnabled = false
+        let emptyController1 = UIViewController()
+        emptyController1.tabBarItem = UITabBarItem(title: nil, image: nil, tag: 2)
+        emptyController1.tabBarItem.isEnabled = false
+        
+        let emptyController2 = UIViewController()
+        emptyController2.tabBarItem = UITabBarItem(title: nil, image: nil, tag: 3)
+        emptyController2.tabBarItem.isEnabled = false
         
         let navigationHome = UINavigationController(rootViewController: homeViewController)
         let navigationMypage = UINavigationController(rootViewController: myPageViewController)
-        let spacingTabBar = emptyController
+        let spacingTabBar1 = emptyController1
+        let spacingTabBar2 = emptyController2
         
-        setViewControllers([navigationHome, spacingTabBar, navigationMypage], animated: false)
+        setViewControllers([navigationHome, spacingTabBar1, spacingTabBar2, navigationMypage], animated: false)
         
         let tabBarAppearance = UITabBarAppearance()
         configureTabBarAppearance(tabBarAppearance: tabBarAppearance)
@@ -209,7 +214,7 @@ extension HomeTabBarViewController : UITabBarControllerDelegate {
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        if let index = tabBarController.viewControllers?.firstIndex(of: viewController), index == 1 {
+        if let index = tabBarController.viewControllers?.firstIndex(of: viewController), index == 1 || index == 2 {
             return false
         }
         return true
