@@ -11,6 +11,7 @@ import Then
 
 class HomeViewController: UIViewController {
     private var esterEggCount = 0
+    private let logoImageViewTag = 999          // 로고 식별을 위한 태그
     
     private lazy var topView = HomeTopView(viewController: self).then { view in
         view.backgroundColor = .pard.blackCard
@@ -33,7 +34,7 @@ class HomeViewController: UIViewController {
     
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-  
+    
     private func setNavigation() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -42,21 +43,6 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.standardAppearance = appearance
         
-        let logoImageView = UIImageView(image: UIImage(named: "pardHomeLogo"))
-        logoImageView.contentMode = .scaleAspectFit
-        logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        logoImageView.isUserInteractionEnabled = true
-        
-        let logoTapGesture = UITapGestureRecognizer(target: self, action: #selector(logoTapped))
-        logoImageView.addGestureRecognizer(logoTapGesture)
-        
-        navigationController?.navigationBar.addSubview(logoImageView)
-        
-        NSLayoutConstraint.activate([
-            logoImageView.leadingAnchor.constraint(equalTo: navigationController!.navigationBar.leadingAnchor, constant: 20),
-            logoImageView.centerYAnchor.constraint(equalTo: navigationController!.navigationBar.centerYAnchor)
-        ])
-
         let menuButton = UIBarButtonItem(
             image: UIImage(named: "menu")?.withRenderingMode(.alwaysOriginal),
             style: .plain,
@@ -68,6 +54,37 @@ class HomeViewController: UIViewController {
         flexibleSpace.width = 10
         self.navigationItem.rightBarButtonItems = [flexibleSpace, menuButton]
     }
+    
+    // 네비게이션바 로고 추가
+    private func addLogoToNavigationBar() {
+        guard let navBar = navigationController?.navigationBar else { return }
+        
+        // 중복 추가 방지
+        if navBar.viewWithTag(logoImageViewTag) != nil { return }
+        
+        let logoImageView = UIImageView(image: UIImage(named: "pardHomeLogo"))
+        logoImageView.contentMode = .scaleAspectFit
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        logoImageView.isUserInteractionEnabled = true
+        logoImageView.tag = logoImageViewTag
+        
+        // 탭 제스처
+        let logoTapGesture = UITapGestureRecognizer(target: self, action: #selector(logoTapped))
+        logoImageView.addGestureRecognizer(logoTapGesture)
+        
+        navBar.addSubview(logoImageView)
+        
+        NSLayoutConstraint.activate([
+            logoImageView.leadingAnchor.constraint(equalTo: navBar.leadingAnchor, constant: 20),
+            logoImageView.centerYAnchor.constraint(equalTo: navBar.centerYAnchor)
+        ])
+    }
+    
+    // 네비게이션바 로고 제거
+    private func removeLogoFromNavigationBar() {
+        navigationController?.navigationBar.viewWithTag(logoImageViewTag)?.removeFromSuperview()
+    }
+    
     
     @objc private func logoTapped() {
         print("tapped")
@@ -109,6 +126,12 @@ extension HomeViewController {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        addLogoToNavigationBar()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeLogoFromNavigationBar()
     }
     
     private func setUpUI() {
